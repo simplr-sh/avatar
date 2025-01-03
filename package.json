@@ -1,0 +1,39 @@
+{
+  "name": "@simplr-sh/avatar",
+  "description": "Simplr Avatar is a simple package that allows you to create an avatar with a name or an image.",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "avatar",
+    "simplr",
+    "react"
+  ],
+  "license": "MIT",
+  "version": "0.0.1",
+  "private": "false",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.cts",
+  "module": "dist/index.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup ./index.ts --format cjs,esm --dts --minify",
+    "dev": "tsup -d",
+    "lint": "tsc"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/tinycolor2": "^1.4.6",
+    "tsup": "^8.3.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "tinycolor2": "^1.6.0"
+  }
+}
