@@ -3,12 +3,26 @@
   "description": "Simplr Avatar is a simple package that allows you to create an avatar with a name or an image.",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/simplr-sh/avatar"
   },
   "keywords": [
     "avatar",
     "simplr",
-    "react"
+    "react",
+    "typescript",
+    "svg",
+    "gradient",
+    "base64",
+    "text",
+    "overlay",
+    "color",
+    "placeholder",
+    "fallback",
+    "image",
+    "name",
+    "username",
+    "user",
+    "simplr-sh"
   ],
   "license": "MIT",
   "version": "0.0.1",
