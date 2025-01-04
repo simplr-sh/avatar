@@ -30,9 +30,13 @@ export async function getAvatar({
   size?: number
   rounded?: number
 }) {
-  const gradient = await generateGradient(name)
+  const gradient = await generateGradient(name).catch((error) => {
+    console.error('Error generating gradient:', error)
+    // Return a default gradient or throw the error
+    return { fromColor: '#808080', toColor: '#C0C0C0' }
+  })
 
-  const svg = `<svg width="${size}" height="${size}" viewbox="0 0 ${size} ${size}" version="1.1" xmlns="http://www.w3.org/2000/svg"><g><defs><linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${
+  const svg = `<svg width="${size}" height="${size}" viewbox="0 0 ${size} ${size}" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${name} avatar"><g><defs><linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${
     gradient.fromColor
   }" /><stop offset="100%" stop-color="${
     gradient.toColor
@@ -41,13 +45,15 @@ export async function getAvatar({
   }</g></svg>`
 
   const base64SvgDataUri = `data:image/svg+xml;base64,${
-    !Buffer ? btoa(svg) : Buffer.from(svg).toString('base64')
+    typeof Buffer !== 'undefined'
+      ? Buffer.from(svg).toString('base64')
+      : btoa(svg)
   }`
   return base64SvgDataUri
 }
 
 function getText({ text, size }: { text: string; size: number }) {
-  return `<text x="50%" y="50%" alignment-baseline="central" dominant-baseline="central" text-anchor="middle" fill="#fff" font-family="inherit" font-size="${
-    (size * 0.9) / text.length
-  }">${text}</text>`
+  const fontSize = Math.max((size * 0.9) / text.length, size / 4)
+
+  return `<text x="50%" y="50%" alignment-baseline="central" dominant-baseline="central" text-anchor="middle" fill="#fff" font-family="inherit" font-size="${fontSize}">${text}</text>`
 }
